@@ -36,16 +36,11 @@ function processarErro(erro){
 
 function processarResposta(res){
     console.log('nome enviado')
-}
-
-fazerGetNome();
-
-function fazerGetNome(){
     
     const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages')
     promisse.then(renderizarNomes)
-
 }
+
 function renderizarNomes(res){
 
     console.log(res)
@@ -56,6 +51,18 @@ function renderizarEntrada(res){
     const entrada = document.querySelector('ul');
     entrada.innerHTML += `<li class="entradas"> <h1>(${res.data[res.data.length -1].time})</h1><p>${res.data[res.data.length - 1].from}</p>entra na sala</li>`
     console.log(res.data[99].time)
+    carregarBatePapo();
+}
+
+
+
+function carregarBatePapo(){
+    const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages')
+    promisse.then(Conversas)
+}
+function Conversas(res){
+    console.log(res)
+    alert('deu certo')
 }
 
 
