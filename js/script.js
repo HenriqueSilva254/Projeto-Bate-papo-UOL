@@ -12,6 +12,12 @@ function chamarNome(seuNome){
 
     nomeUsuario.name = prompt(seuNome)
     Requisitar();
+    setInterval(manterConexao, 5000)
+}
+
+function manterConexao(){
+    const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/status', nomeUsuario)
+    promisse.then(console.log('ta dando certo'))
 }
 
 function Requisitar(){
@@ -29,9 +35,16 @@ function processarErro(erro){
 }
 
 function processarResposta(res){
+    console.log('nome enviado')
+}
+
+fazerGetNome();
+
+function fazerGetNome(){
     
     const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages')
     promisse.then(renderizarNomes)
+
 }
 function renderizarNomes(res){
 
