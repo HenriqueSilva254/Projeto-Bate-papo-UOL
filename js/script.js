@@ -13,11 +13,21 @@ function chamarNome(seuNome){
     nomeUsuario.name = prompt(seuNome)
     Requisitar();
     setInterval(manterConexao, 5000)
+    setInterval(apagarMenssagens, 3000)
 }
+let i = 0;
+
+function apagarMenssagens(){
+    const entrada = document.getElementById('menssagens').children[i];
+    entrada.style.display = 'none'
+    i++;
+}
+
 
 function manterConexao(){
     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/uol/status', nomeUsuario)
     promisse.then(console.log('ta dando certo'))
+    
 }
 
 function Requisitar(){
@@ -54,12 +64,11 @@ function renderizarEntrada(res){
     carregarBatePapo();
 }
 
-
-
 function carregarBatePapo(){
     const promisse = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages')
     promisse.then(Conversas)
 }
+
 function Conversas(res){
     for(let i = 90; i < 100; i++){
       
@@ -67,14 +76,24 @@ function Conversas(res){
         renderizarConversas(res.data[i])
     }
 }
+
 function renderizarConversas(res) {
     const entrada = document.querySelector('ul');
     entrada.innerHTML += `<li class="entradas"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
+    
 }
-
 /*    
 for( let i = 0; i < res.length; i++){
         let nome = res[i]
         entrada.innerHTML += `<li>${nome} entra na sala</li>`
+}
+
+
+
+apagaConversas = (i) => {
+    console.log('asdfaasfadfgsd')
+    const entrada = document.querySelector('ul').children;
+    entrada[i].innerHTML = ''
+
 }
 */
