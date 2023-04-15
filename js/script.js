@@ -27,7 +27,7 @@ function Requisitar(){
     
 }
 function processarErro(erro){
-    if(erro.response.status === 400){
+    if(erro.response.status !== 200){
      
     nomeUsuario.name = prompt(perguntaErro)
     Requisitar();
@@ -61,10 +61,16 @@ function carregarBatePapo(){
     promisse.then(Conversas)
 }
 function Conversas(res){
-    console.log(res)
-    alert('deu certo')
+    for(let i = 90; i < 100; i++){
+      
+        console.log(res.data[i])
+        renderizarConversas(res.data[i])
+    }
 }
-
+function renderizarConversas(res) {
+    const entrada = document.querySelector('ul');
+    entrada.innerHTML += `<li class="entradas"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
+}
 
 /*    
 for( let i = 0; i < res.length; i++){
