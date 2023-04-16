@@ -8,6 +8,13 @@ const perguntaErro = "Esse nome já existe, digite outro nome:"
 chamarNome(pergunta)
 
 
+document.addEventListener("keypress", function(e) {
+    if(e.key === "Enter"){
+        const enviar= document.getElementById('send')
+        enviar.click(console.log('ooooo'))
+    }
+})
+
 function chamarNome(seuNome){
 
     nomeUsuario.name = prompt(seuNome)
@@ -82,6 +89,9 @@ function renderizarConversas(res) {
     entrada.innerHTML += `<li class="entradas"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
     
 }
+
+
+
 /*    
 for( let i = 0; i < res.length; i++){
         let nome = res[i]

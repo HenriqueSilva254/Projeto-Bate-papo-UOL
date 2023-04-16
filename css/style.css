@@ -64,6 +64,16 @@ input::placeholder {
     align-items: center;
 
 }
+button {
+    position: fixed;
+    left: 88.27%;
+    right: 4.8%;
+    bottom: 30px;
+    border: 0px;
+    width: 26px;
+    height: 26px;
+    background-color: inherit;
+}
 .icon_plane {
     font-size: 26px;
     position: fixed;
