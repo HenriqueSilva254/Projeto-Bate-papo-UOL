@@ -23,14 +23,23 @@
         <ul class="entrou" id="menssagens">
             
         </ul>
+        
     </main>
     <footer>
-        <form action="" >
-            <input type="text" id="idtexto" placeholder="Escreva aqui..." class="chat" required>
-            <button id="send" type = "submit"><ion-icon class="icon_plane" name="paper-plane-outline"></ion-icon></button>
+        <!--
+        <form action="">
+            <input type="text" name="name" id="idtexto" placeholder="Escreva aqui..." class="chat" required>
+            <button id="send" type = "submit"></button>
+        </form>
+        -->
+        
+        <form action="">
+            <input type="text" name="name" id="name" placeholder="Escreva aqui..." class="chat" required>
+            <ion-icon class="icon_plane" name="paper-plane-outline"></ion-icon>
+            <input type = "submit" id="send" value="" class="botao">
         </form>
     </footer>
-
+    
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./js/script.js"></script>    

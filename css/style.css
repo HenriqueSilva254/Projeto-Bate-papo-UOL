@@ -39,7 +39,8 @@ main {
     height: 300px;
     background-color: blue;  
 }
-input{
+
+.chat{
     font-family: 'Roboto';
     background-color: #FFFFFF;
     border: inherit;
@@ -53,7 +54,7 @@ input{
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
     font-size: 18px;
 }
-input::placeholder {
+.chat::placeholder {
     
     font-family: 'Roboto';
     font-style: italic;
@@ -64,7 +65,8 @@ input::placeholder {
     align-items: center;
 
 }
-button {
+
+.botao {
     position: fixed;
     left: 88.27%;
     right: 4.8%;
@@ -74,6 +76,7 @@ button {
     height: 26px;
     background-color: inherit;
 }
+
 .icon_plane {
     font-size: 26px;
     position: fixed;

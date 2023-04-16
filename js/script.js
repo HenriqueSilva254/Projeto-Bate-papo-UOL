@@ -8,12 +8,6 @@ const perguntaErro = "Esse nome já existe, digite outro nome:"
 chamarNome(pergunta)
 
 
-document.addEventListener("keypress", function(e) {
-    if(e.key === "Enter"){
-        const enviar= document.getElementById('send')
-        enviar.click(console.log('ooooo'))
-    }
-})
 
 function chamarNome(seuNome){
 
@@ -60,7 +54,7 @@ function processarResposta(res){
 
 function renderizarNomes(res){
 
-    console.log(res)
+    mandarMenssagens(res,)
     renderizarEntrada(res)
 }
 
@@ -77,7 +71,7 @@ function carregarBatePapo(){
 }
 
 function Conversas(res){
-    for(let i = 90; i < 100; i++){
+    for(let i = 0; i < 100; i++){
       
         console.log(res.data[i])
         renderizarConversas(res.data[i])
@@ -89,7 +83,29 @@ function renderizarConversas(res) {
     entrada.innerHTML += `<li class="entradas"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
     
 }
-
+function mandarMenssagens(value){
+    const menssagens =  {
+        from: nomeUsuario.name,
+        to: "Todos",
+        text: value,
+        type: "message" // ou "private_message" para o bônus
+    }
+    const promisse = axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", menssagens)
+    promisse.then(menssagenPost)
+    console.log(menssagens)
+}
+function menssagenPost(res) {
+    console.log(res)
+}
+const btn = document.querySelector("#send")
+btn.addEventListener("click", function(e) {
+    
+    e.preventDefault();
+    const name = document.querySelector("#name")
+    const value = name.value
+    mandarMenssagens(value)
+    name.value =""
+})
 
 
 /*    
@@ -106,4 +122,12 @@ apagaConversas = (i) => {
     entrada[i].innerHTML = ''
 
 }
+
+document.addEventListener("keypress", function(e) {
+    
+    if(e.key === "Enter"){
+        const enviar= document.getElementById('send')
+        enviar.click(console.log('ooooo'))
+    }
+})
 */
