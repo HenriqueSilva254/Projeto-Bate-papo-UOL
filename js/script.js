@@ -60,7 +60,7 @@ function renderizarNomes(res){
 
 function renderizarEntrada(res){
     const entrada = document.querySelector('ul');
-    entrada.innerHTML += `<li class="entradas"> <h1>(${res.data[res.data.length -1].time})</h1><p>${res.data[res.data.length - 1].from}</p>entra na sala</li>`
+   // entrada.innerHTML += `<li class="entradas"> <h1>(${res.data[res.data.length -1].time})</h1><p>${res.data[res.data.length - 1].from}</p>entra na sala</li>`
     console.log(res.data[99].time)
     carregarBatePapo();
 }
