@@ -11,7 +11,7 @@ let novasMenssagens = ''
 chamarNome(pergunta)
 
 
-setInterval(checarConversas, 1000)
+setInterval(checarConversas, 3000)
 function chamarNome(seuNome){
 
     nomeUsuario.name = prompt(seuNome)
@@ -64,8 +64,6 @@ function renderizarNomes(res){
 
 function renderizarEntrada(res){
     const entrada = document.querySelector('ul');
-   // entrada.innerHTML += `<li data-test="message" class="entradas"> <h1>(${res.data[res.data.length -1].time})</h1><p>${res.data[res.data.length - 1].from}</p>entra na sala</li>`
-    // console.log(res.data[99].time)
     carregarBatePapo();
 }
 
@@ -87,21 +85,29 @@ function renderizarConversas(res) {
 
     
     novasMenssagens = res.data[99].time
-    console.log(menssagensAntigas, novasMenssagens)
+   
 
     const ul = document.getElementById('menssagens');
     const menssagens =  `<li data-test="message" class="entradas"> <h1>(${res.data[99].time})</h1><p>${res.data[99].from}</p>para<p>${res.data[99].to +":"}</p> ${res.data[99].text}</li>` 
     if(menssagensAntigas === novasMenssagens ){
-    }else { console.log(menssagensAntigas, novasMenssagens)
-        ul.innerHTML += menssagens
+    }else {
+        mandaMenssagem(res.data[99])
         menssagensAntigas = novasMenssagens }
      
+}
+function mandaMenssagem(res){
+     const entrada = document.getElementById('menssagens');
+    if(res.type === "message" && res.to === "Todos"){
+        entrada.innerHTML += `<li data-test="message" class="entradas menssagenTodos "> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
+    }
+    if(res.type === "message" && res.to !== "Todos"){entrada.innerHTML += `<li data-test="message" class="entradas menssagensPessoais"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`}
+    if (res.type === "status" ){
+        entrada.innerHTML += `<li data-test="message" class="entradas"> <h1>(${res.time})</h1> <p>${res.from}</p>${res.text}</li>`
+    }
 }
 
 function historicoMenssagens(res){
     for(let i = 0; i < 100; i++){
-        // console.log('texto menssafens')              ul.innerHTML += menssagens
-        // console.log(res.data[i])
         renderizarHistorico(res.data[i])
     }
     
@@ -109,12 +115,17 @@ function historicoMenssagens(res){
 }
 
 function renderizarHistorico(res) {
-    const entrada = document.querySelector('ul');
-    entrada.innerHTML += `<li data-test="message" class="entradas"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
     
-}
-function menssagenPost(res) {
-    // console.log(res)
+    const entrada = document.querySelector('ul');
+    if(res.type === "message" && res.to === "Todos"){
+        entrada.innerHTML += `<li data-test="message" class="entradas menssagenTodos "> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`
+    }
+    if(res.type === "message" && res.to !== "Todos"){entrada.innerHTML += `<li data-test="message" class="entradas menssagensPessoais"> <h1>(${res.time})</h1><p>${res.from}</p>para<p>${res.to +":"}</p> ${res.text}</li>`}
+    if (res.type === "status" ){
+        entrada.innerHTML += `<li data-test="message" class="entradas"> <h1>(${res.time})</h1> <p>${res.from}</p>${res.text}</li>`
+    }
+    
+    
 }
 const btn = document.querySelector("#send")
 btn.addEventListener("click", function(e) {
@@ -135,31 +146,13 @@ function postMenssagens(value){
     }
     const promisse = axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", menssagens)
     promisse.then(menssagenPost)
-    // console.log(menssagens)
+    promisse.catch(erroPostmenssagen)
+  
     
 }
-
-
-/*    
-for( let i = 0; i < res.length; i++){
-        let nome = res[i]
-        entrada.innerHTML += `<li data-test="message">${nome} entra na sala</li>`
+function erroPostmenssagen(){
+   
 }
-
-
-
-apagaConversas = (i) => {
-    // console.log('asdfaasfadfgsd')
-    const entrada = document.querySelector('ul').children;
-    entrada[i].innerHTML = ''
-
+function menssagenPost(res) {
+    checarConversas(res)
 }
-
-document.addEventListener("keypress", function(e) {
-    
-    if(e.key === "Enter"){
-        const enviar= document.getElementById('send')
-        enviar.click(// console.log('ooooo'))
-    }
-})
-*/

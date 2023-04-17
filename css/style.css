@@ -118,3 +118,9 @@ h1 {
     font-size: 14px;
     margin-right: 6px;
 }
+.menssagensPessoais {
+    background-color: #FFDEDE;
+}
+.menssagenTodos {
+    background-color: #FFFFFF;
+}
